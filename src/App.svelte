@@ -2,6 +2,11 @@
 import Board from './Board.svelte';
 import Modal from './Modal.svelte';
 
+let maxId = 49;
+const sampleItem = () => {
+  return {id: ++maxId, name: `title-${maxId}`, degree: "LOW", description: "description", completeness: 0};
+}
+
 let board = [
   {
     id: 1,
@@ -34,6 +39,16 @@ const updateBoard = (i, j, propName, value) => {
   board[i].items[j][propName] = value;
 }
 
+const addItem = (i) => {
+  board[i].items[board[i].items.length] = sampleItem();
+}
+
+const removeItem = (i,idx) => {
+  const updatedBoard = board[i].items;
+  updatedBoard.splice(idx,1);
+  board[i].items = updatedBoard;
+}
+
 </script>
 
 <style>
@@ -44,5 +59,5 @@ const updateBoard = (i, j, propName, value) => {
 </style>
 
 <Modal>
-  <Board columnItems={board} {updateBoard}></Board>
+  <Board bind:columnItems={board} {updateBoard} {addItem} {removeItem}></Board>
 </Modal>

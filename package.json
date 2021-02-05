@@ -4,7 +4,9 @@
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
-    "start": "sirv public"
+    "start": "sirv public",
+    "pre-deploy": "npm run build && rm -rf docs && mkdir docs && cp -rf public/* docs",
+    "deploy": "git add -A && git commit -m 'auto deploy' && git push"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^17.0.0",

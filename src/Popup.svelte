@@ -40,7 +40,6 @@ const degreeMap = {
 const degreeColorMap = (degree, value) => {
   return value === degree ? degreeMap[degree] : "rgb(224,224,224)";
 }
-
 </script>
 
 <style>

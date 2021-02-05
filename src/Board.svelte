@@ -7,7 +7,8 @@ import Popup from './Popup.svelte';
 
 export let columnItems;
 export let updateBoard;
-
+export let addItem;
+export let removeItem;
 const { open } = getContext('simple-modal');
 
 const flipDurationMs = 300;
@@ -16,6 +17,20 @@ let choiced = [];
 
 const change = (i, j, propName, value) => {
   updateBoard(i, j, propName, value);
+}
+
+const add = (i) => {
+  addItem(i);
+}
+
+const removes = (i) => {
+  const idxs = choiced.map(id => {
+    return columnItems[i].items.findIndex(item => item.id === id);
+  }).sort().reverse().forEach((idx) => {
+    removeItem(i, idx);
+  })
+
+  choiced = [];
 }
 
 const degreeColorMap = (degree) => {
@@ -31,7 +46,7 @@ const degreeColorMap = (degree) => {
 }
 
 const completenessColorMap = (completeness) => {
-  return `rgb(${255*(100 - completeness)/100},0,${255 - 255*(100 - completeness)/100})`
+  return `rgb(${255*(100 - completeness)/100},0,${255 - 255*(100 - completeness)/100})`;
 }
 
 const showPopup = (column, item, i, j) => {
@@ -65,7 +80,7 @@ function handleClick(column, item, i, j) {
 </script>
 
 <div class="crown">
-  <img alt="" class="icon" src="/palladocs_128.png">
+  <img alt="" class="icon" src="/palladocs/palladocs_128.png">
   <h3 class="app-name">palladocs</h3>
 </div>
 <section class="board">
@@ -73,6 +88,10 @@ function handleClick(column, item, i, j) {
   {#each columnItems as column, i (column.id)}
     <div class="column"><!-- animate:flip="{{duration: flipDurationMs}}"> -->
       <div class="column-title">{column.name}</div>
+      <div class="icontainer">
+        <div class="add" on:click={add(i)}>+</div>
+        <div class="remove" on:click={removes(i)}>−</div>
+      </div>
       <div class="column-content" use:dndzone={{items:column.items, flipDurationMs}}
            on:consider={(e) => handleDndConsiderCards(column.id, e)} on:finalize={(e) => handleDndFinalizeCards(column.id, e)}>
            {#each column.items as item, j (item.id)}
@@ -99,8 +118,6 @@ function handleClick(column, item, i, j) {
 </section>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Acme&display=swap');
-
 .icon {
   height: 5vh;
   object-fit: contain;
@@ -110,6 +127,38 @@ function handleClick(column, item, i, j) {
   position: absolute;
   color: white;
   font-family: 'Acme', sans-serif;
+}
+.icontainer {
+  display: flex;
+  font-size: 3.5vh;
+  height: 3.5vh;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+.add {
+  background: darkslategray;
+  color: white;
+  width: 3.5vh;
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+  line-height: 3.0vh;
+  border-radius: 50%;
+  cursor: pointer;
+  margin-right: 0.25em;
+}
+.remove {
+  background: darkslategray;
+  color: white;
+  width: 3.6vh;
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+  line-height: 3.0vh;
+  border-radius: 50%;
+  cursor: pointer;
 }
 .crown {
   top: 0;
@@ -124,14 +173,16 @@ function handleClick(column, item, i, j) {
 }
 .board {
   height: 80vh;
+  /* margin-bottom: 40px; */
   padding: 0.5em;
-  margin-bottom: 40px;
   outline: none;
   margin-top: 10vh;
+  overflow-y: hidden;
 }
 .column {
-  height: 100%;
+  height: 75vh;
   padding: 0.5em;
+  padding-bottom: 2.5em;
   float: left;
   border: 1px solid #333333;
   /*Notice we make sure this container doesn't scroll so that the title stays on top and the dndzone inside is scrollable*/
@@ -146,11 +197,16 @@ function handleClick(column, item, i, j) {
   .board {
     width: 300%;
     overflow-x: scroll;
+    height: 70vh;
+  }
+  .column {
+    height: 65vh;
   }
 }
 @media (orientation: landscape) {
   .board {
     width: 100vw;
+    overflow-x: hidden;
   }
 }
 .column-content {
@@ -165,7 +221,7 @@ function handleClick(column, item, i, j) {
   align-items: center;
 }
 .card {
-  height: 15%;
+  height: 10vh;
   width: 100%;
   padding: 10px;
   margin: 0.4em 0;
