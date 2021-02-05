@@ -4,6 +4,7 @@ import { fly } from 'svelte/transition';
 import { flip } from 'svelte/animate';
 import { dndzone } from 'svelte-dnd-action';
 import Popup from './Popup.svelte';
+import Crown from './Crown.svelte';
 
 export let columnItems;
 export let updateBoard;
@@ -74,15 +75,11 @@ function handleDndFinalizeCards(cid, e) {
 }
 
 function handleClick(column, item, i, j) {
-  console.log("clicked", column, item);
   showPopup(column, item, i, j);
 }
 </script>
 
-<div class="crown">
-  <img alt="" class="icon" src="/palladocs/palladocs_128.png">
-  <h3 class="app-name">palladocs</h3>
-</div>
+<Crown></Crown>
 <section class="board">
   <!-- use:dndzone={{items:columnItems, flipDurationMs, type:'columns'}} on:consider={handleDndConsiderColumns} on:finalize={handleDndFinalizeColumns}> -->
   {#each columnItems as column, i (column.id)}
@@ -96,7 +93,9 @@ function handleClick(column, item, i, j) {
            on:consider={(e) => handleDndConsiderCards(column.id, e)} on:finalize={(e) => handleDndFinalizeCards(column.id, e)}>
            {#each column.items as item, j (item.id)}
              <div class="card" animate:flip="{{duration: flipDurationMs}}" on:click={handleClick(column, item, i, j)}>
-               <input class="checkbox" type="checkbox" bind:group={choiced} value={item.id}>
+               <label>
+                 <input class="checkbox" type="checkbox" bind:group={choiced} value={item.id}>
+               </label>  
                <div>
                  <div style="margin-bottom: 10px">
                    {item.name}
@@ -118,69 +117,50 @@ function handleClick(column, item, i, j) {
 </section>
 
 <style>
-.icon {
-  height: 5vh;
-  object-fit: contain;
-  margin-left: -15vh;
-}
-.app-name {
-  position: absolute;
-  color: white;
-  font-family: 'Acme', sans-serif;
-}
 .icontainer {
   display: flex;
-  font-size: 3.5vh;
-  height: 3.5vh;
+  font-size: 135%;
+  height: 5%;
   user-select: none;
   -moz-user-select: none;
   -webkit-user-select: none;
   -ms-user-select: none;
 }
 .add {
-  background: darkslategray;
-  color: white;
-  width: 3.5vh;
+  /* background: darkslategray; */
+  color: black;
+  width: 5%;
   display: flex;
   justify-content: center;
   /* align-items: center; */
-  line-height: 3.5vh;
+  line-height: 35%;
   border-radius: 50%;
   cursor: pointer;
   margin-right: 0.25em;
+  outline: none;
 }
 .remove {
-  background: darkslategray;
-  color: white;
-  width: 3.6vh;
+  /* background: darkslategray; */
+  color: black;
+  width: 6%;
   display: flex;
   justify-content: center;
   /* align-items: center; */
-  line-height: 3.5vh;
+  line-height: 35%;
   border-radius: 50%;
   cursor: pointer;
-}
-.crown {
-  top: 0;
-  left: 0;
-  width: 100vw;
-  position: fixed;
-  background-color: steelblue;
-  height: 7.5vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  outline: none;
 }
 .board {
-  height: 80vh;
+  height: 80%;
   /* margin-bottom: 40px; */
   padding: 0.5em;
   outline: none;
-  margin-top: 10vh;
+  margin-top: 5%;
   overflow-y: hidden;
 }
 .column {
-  height: 75vh;
+  height: 95%;
   padding: 0.5em;
   padding-bottom: 2.5em;
   float: left;
@@ -205,7 +185,7 @@ function handleClick(column, item, i, j) {
   align-items: center;
 }
 .card {
-  height: 10vh;
+  height: 15%;
   width: 100%;
   padding: 10px;
   margin: 0.4em 0;
@@ -242,10 +222,10 @@ function handleClick(column, item, i, j) {
   .board {
     width: 300%;
     overflow-x: scroll;
-    height: 70vh;
+    margin-top: 10%;
   }
   .column {
-    height: 65vh;
+    /* height: 65%; */
   }
   .card {
     margin-right: 10%;
