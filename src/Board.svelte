@@ -144,7 +144,7 @@ function handleClick(column, item, i, j) {
   display: flex;
   justify-content: center;
   /* align-items: center; */
-  line-height: 3.0vh;
+  line-height: 3.5vh;
   border-radius: 50%;
   cursor: pointer;
   margin-right: 0.25em;
@@ -156,7 +156,7 @@ function handleClick(column, item, i, j) {
   display: flex;
   justify-content: center;
   /* align-items: center; */
-  line-height: 3.0vh;
+  line-height: 3.5vh;
   border-radius: 50%;
   cursor: pointer;
 }
@@ -192,22 +192,6 @@ function handleClick(column, item, i, j) {
   /* filter: blur(2px); */
   color: black;
   background-color: lightgoldenrodyellow;
-}
-@media (orientation: portrait) {
-  .board {
-    width: 300%;
-    overflow-x: scroll;
-    height: 70vh;
-  }
-  .column {
-    height: 65vh;
-  }
-}
-@media (orientation: landscape) {
-  .board {
-    width: 100vw;
-    overflow-x: hidden;
-  }
 }
 .column-content {
   height: 95%;
@@ -253,5 +237,25 @@ function handleClick(column, item, i, j) {
   width: 60px;
   padding-top: 2px;
   padding-bottom: 2px;
+}
+@media (orientation: portrait) {
+  .board {
+    width: 300%;
+    overflow-x: scroll;
+    height: 70vh;
+  }
+  .column {
+    height: 65vh;
+  }
+  .card {
+    margin-right: 10%;
+    width: 90%;
+  }
+}
+@media (orientation: landscape) {
+  .board {
+    width: 100vw;
+    overflow-x: hidden;
+  }
 }
 </style>
