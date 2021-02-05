@@ -1,4 +1,7 @@
 <script>
+/* popup ref: https://svelte.dev/repl/033e824fad0a4e34907666e7196caec4?version=3.4.1 */
+/* slider ref: https://svelte.dev/repl/numeric-inputs?version=3.32.1 */
+
 import TextArea from "./TextAreaAutosize.svelte";
 
 export let columnItems;

@@ -1,9 +1,14 @@
 <script>
+/* checkbox ref: https://svelte.dev/repl/1565708677134e418e256234984d90ef?version=3.12.1 */
+
+/* svelte-dnd ref: https://svelte.dev/repl/b4ac32e84dc24c079d7a5c243f787d26?version=3.32.1 */
 import { getContext } from 'svelte';
 import { fly } from 'svelte/transition';
 import { flip } from 'svelte/animate';
 import { dndzone } from 'svelte-dnd-action';
+/* popup ref: https://svelte.dev/repl/033e824fad0a4e34907666e7196caec4?version=3.4.1 */
 import Popup from './Popup.svelte';
+
 import Crown from './Crown.svelte';
 
 export let columnItems;
@@ -14,6 +19,7 @@ const { open } = getContext('simple-modal');
 
 const flipDurationMs = 300;
 
+/* choiced ref: https://svelte.dev/repl/f2074ef75dee444faaee005b8b7cf9b9?version=3.32.1 */
 let choiced = [];
 
 const change = (i, j, propName, value) => {

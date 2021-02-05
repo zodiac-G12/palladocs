@@ -95,6 +95,7 @@ const removeItem = async (i,idx) => {
 }
 </style>
 
+<!-- importtant Modal wrap https://github.com/flekschas/svelte-simple-modal/issues/16-->
 <Modal>
   <Board bind:columnItems={board} {updateBoard} {addItem} {removeItem}></Board>
 </Modal>

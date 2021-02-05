@@ -1,4 +1,6 @@
 <script>
+/* ref: https://svelte.dev/repl/40f4c7846e6f4052927ff5f9c5271b66?version=3.6.8 */
+
 export let value = '';
 export let minRows = 1;
 export let maxRows;
