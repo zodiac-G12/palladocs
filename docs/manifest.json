@@ -15,7 +15,7 @@
       "purpose": "any maskable"
     }
   ],
-  "start_url": "./palladocs",
+  "start_url": ".",
   "display": "standalone",
   "theme_color": "#4169e1",
   "background_color": "#4169e1"
