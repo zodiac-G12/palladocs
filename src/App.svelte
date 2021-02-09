@@ -3,6 +3,10 @@ import Board from './Board.svelte';
 import Modal from './Modal.svelte';
 import * as localForage from 'localforage';
 
+/* import * as serviceWorker from './serviceWorker'; */
+/*  */
+/* serviceWorker.register(); */
+
 let maxId = 12;
 const sampleItem = () => {
   return {id: ++maxId, name: `title-${maxId}`, degree: "LOW", description: "description", completeness: 0};
