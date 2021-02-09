@@ -92,7 +92,6 @@ const removeItem = async (i,idx) => {
 
 const saveBoard = async () => {
   try {
-    console.log("saveBoard");
     await localForage.setItem("board", JSON.stringify(board));
   } catch (error) {
     console.error(`At saveBoard: ${error}`);

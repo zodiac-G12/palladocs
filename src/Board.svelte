@@ -1,4 +1,8 @@
 <script>
+// FIXME:
+//  node_modules/svelte-dnd-action/src/pointerAction.js:496
+//  add: {passive: true}
+
 /* checkbox ref: https://svelte.dev/repl/1565708677134e418e256234984d90ef?version=3.12.1 */
 
 /* svelte-dnd ref: https://svelte.dev/repl/b4ac32e84dc24c079d7a5c243f787d26?version=3.32.1 */
