@@ -35,7 +35,7 @@ function changeDegree(e) {
 const degreeMap = {
   "LOW": "blue",
   "MEDIUM": "green",
-  "HIGH": "orange",
+  "HIGH": "mediumvioletred",
   "CRITICAL": "red",
   "PENDING": "indigo"
 };

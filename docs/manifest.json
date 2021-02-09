@@ -1,0 +1,22 @@
+{
+  "short_name": "Palladocs",
+  "name": "progressive TODO app",
+  "icons": [
+    {
+      "src": "palladocs_128.png",
+      "type": "image/png",
+      "sizes": "128x128",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "palladocs_512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#4169e1",
+  "background_color": "#4169e1"
+}

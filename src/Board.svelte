@@ -15,6 +15,8 @@ export let columnItems;
 export let updateBoard;
 export let addItem;
 export let removeItem;
+export let saveBoard;
+
 const { open } = getContext('simple-modal');
 
 const flipDurationMs = 300;
@@ -44,8 +46,8 @@ const degreeColorMap = (degree) => {
   const colorMap = {
     "LOW": "blue",
     "MEDIUM": "green",
-    "HIGH": "orange",
-    "CRITICAL": "red",
+    "HIGH": "mediumvioletred",
+    "CRITICAL": "crimson",
     "PENDING": "indigo"
   };
 
@@ -53,7 +55,7 @@ const degreeColorMap = (degree) => {
 }
 
 const completenessColorMap = (completeness) => {
-  return `rgb(${255*(100 - completeness)/100},0,${255 - 255*(100 - completeness)/100})`;
+  return `rgb(${220*(100 - completeness)/100},20,60)`;
 }
 
 const showPopup = (column, item, i, j) => {
@@ -78,9 +80,13 @@ function handleDndFinalizeCards(cid, e) {
   const colIdx = columnItems.findIndex(c => c.id === cid);
   columnItems[colIdx].items = e.detail.items;
   columnItems = [...columnItems];
+  saveBoard();
 }
 
-function handleClick(column, item, i, j) {
+function handleClick(event, column, item, i, j) {
+  if (event.target.tagName === "INPUT") {
+    return;
+  }
   showPopup(column, item, i, j);
 }
 </script>
@@ -98,10 +104,11 @@ function handleClick(column, item, i, j) {
       <div class="column-content" use:dndzone={{items:column.items, flipDurationMs}}
            on:consider={(e) => handleDndConsiderCards(column.id, e)} on:finalize={(e) => handleDndFinalizeCards(column.id, e)}>
            {#each column.items as item, j (item.id)}
-             <div class="card" animate:flip="{{duration: flipDurationMs}}" on:click={handleClick(column, item, i, j)}>
-               <label>
-                 <input class="checkbox" type="checkbox" bind:group={choiced} value={item.id}>
-               </label>  
+             <div class="card" animate:flip="{{duration: flipDurationMs}}" on:click={(event) => handleClick(event, column, item, i, j)}>
+               <label class="checkbox-label">
+                 checkbox
+                 <input class="checkbox" type="checkbox" bind:group={choiced} value={item.id} >
+               </label>
                <div>
                  <div style="margin-bottom: 10px">
                    {item.name}
@@ -123,6 +130,15 @@ function handleClick(column, item, i, j) {
 </section>
 
 <style>
+.checkbox-label {
+  color: rgba(0,0,0,0);
+  font-size: 0px;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  
+}
 .icontainer {
   display: flex;
   font-size: 135%;
@@ -242,6 +258,9 @@ function handleClick(column, item, i, j) {
   .board {
     width: 100vw;
     overflow-x: hidden;
+  }
+  .column-title {
+    font-size: 120%;
   }
 }
 </style>

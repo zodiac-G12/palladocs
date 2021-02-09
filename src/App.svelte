@@ -8,51 +8,51 @@ const sampleItem = () => {
   return {id: ++maxId, name: `title-${maxId}`, degree: "LOW", description: "description", completeness: 0};
 }
 
-let board = [
-  {
-    id: 1,
-    name: "TODO",
-    items: [
-      {id: 4, name: "HOME PARTY", degree: "LOW", description: "description", completeness: 0},
-      {id: 5, name: "KARAOKE", degree: "MEDIUM", description: "description", completeness: 10},
-      {id: 6, name: "SEARCH WORK", degree: "HIGH", description: "description", completeness: 20},
-      {id: 7, name: "SEND MONEY", degree: "CRITICAL", description: "description", completeness: 100},
-      {id: 8, name: "EAT MEET", degree: "PENDING", description: "description", completeness: 90},
-      {id: 9, name: "PLAY SPORT", degree: "LOW", description: "description", completeness: 10},
-      {id: 10, name: "GAME CREAR", degree: "MEDIUM", description: "description", completeness: 0},
-      {id: 11, name: "KILL BUGS", degree: "CRITICAL", description: "description", completeness: 30},
-      {id: 12, name: "WASH BATH", degree: "PENDING", description: "description", completeness: 55}
-    ]
-  },
-  {
-    id: 2,
-    name: "PROGRESS",
-    items: []
-  },
-  {
-    id: 3,
-    name: "DONE",
-    items: []
-  }
-];
+let board = [];
+
 localForage.getItem("board").then((value) => {
   if(value) {
-    console.log(value)
     board = JSON.parse(value);
     return;
+  } else {
+    board = [
+      {
+        id: 1,
+        name: "TODO",
+        items: [
+          {id: 4, name: "HOME PARTY", degree: "LOW", description: "description", completeness: 0},
+          {id: 5, name: "KARAOKE", degree: "MEDIUM", description: "description", completeness: 10},
+          {id: 6, name: "SEARCH WORK", degree: "HIGH", description: "description", completeness: 20},
+          {id: 7, name: "SEND MONEY", degree: "CRITICAL", description: "description", completeness: 100},
+          {id: 8, name: "EAT MEET", degree: "PENDING", description: "description", completeness: 90},
+          {id: 9, name: "PLAY SPORT", degree: "LOW", description: "description", completeness: 10},
+          {id: 10, name: "GAME CREAR", degree: "MEDIUM", description: "description", completeness: 0},
+          {id: 11, name: "KILL BUGS", degree: "CRITICAL", description: "description", completeness: 30},
+          {id: 12, name: "WASH BATH", degree: "PENDING", description: "description", completeness: 55}
+        ]
+      },
+      {
+        id: 2,
+        name: "PROGRESS",
+        items: []
+      },
+      {
+        id: 3,
+        name: "DONE",
+        items: []
+      }
+    ];
   }
   localForage.setItem("board", JSON.stringify(board));
 });
 
 localForage.getItem("maxId").then((value) => {
   if(value) {
-    console.log(value)
     maxId = parseInt(value);
     return;
   }
   localForage.setItem("maxId", maxId);
 });
-
 
 const updateBoard = async (i, j, propName, value) => {
   try {
@@ -86,6 +86,15 @@ const removeItem = async (i,idx) => {
   }
 }
 
+const saveBoard = async () => {
+  try {
+    console.log("saveBoard");
+    await localForage.setItem("board", JSON.stringify(board));
+  } catch (error) {
+    console.error(`At saveBoard: ${error}`);
+  }
+}
+
 </script>
 
 <style>
@@ -97,5 +106,5 @@ const removeItem = async (i,idx) => {
 
 <!-- importtant Modal wrap https://github.com/flekschas/svelte-simple-modal/issues/16-->
 <Modal>
-  <Board bind:columnItems={board} {updateBoard} {addItem} {removeItem}></Board>
+  <Board bind:columnItems={board} {updateBoard} {saveBoard} {addItem} {removeItem}></Board>
 </Modal>

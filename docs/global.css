@@ -22,11 +22,11 @@ body {
 /*     overflow-x: scroll; */
 /*   } */
 /* } */
-/* @media (orientation: landscape) { */
-/*   /* .board { */
-/*   /*   width: 100vw; */
-/*   /* } */
-/* } */
+@media (orientation: landscape) {
+  body {
+    overflow-x: hidden;
+  }
+}
 
 a {
 	color: rgb(0,100,200);

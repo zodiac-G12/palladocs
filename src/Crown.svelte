@@ -10,7 +10,7 @@
 .crown {
   top: 0;
   left: 0;
-  width: 100vw;
+  width: 100%;
   position: fixed;
   background-color: steelblue;
   height: 7.5%;
@@ -27,5 +27,10 @@
   position: absolute;
   color: white;
   font-family: 'Acme', sans-serif;
+}
+@media (orientation: landscape) {
+  .app-name {
+    font-size: 150%;
+  }
 }
 </style>
