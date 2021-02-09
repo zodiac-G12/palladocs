@@ -36,7 +36,7 @@ const degreeMap = {
   "LOW": "blue",
   "MEDIUM": "green",
   "HIGH": "mediumvioletred",
-  "CRITICAL": "red",
+  "CRITICAL": "crimson",
   "PENDING": "indigo"
 };
 
